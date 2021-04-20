@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{PName}} {{ttype}} task</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mine.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/material-circle.css') }}">
+    <noscript<link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+</head>
+<body class="my-preload" onload="projects_init()">
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header id="header">
+            <h2 id="logo"><a href="/"><b class="title" style="color: #e44c65;">Cr</b>eative</a></h2>
+            <nav id="nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li>
+                        <a href="#">Layouts</a>
+                        <ul>
+                            <li><a href="/leftsidebar">Left Sidebar</a></li>
+                            <li><a href="/rightsidebar">Right Sidebar</a></li>
+                            <li><a href="no-sidebar.html">No Sidebar</a></li>
+                            <li>
+                                <a href="#">Submenu</a>
+                                <ul>
+                                    <li><a href="#">Option 1</a></li>
+                                    <li><a href="#">Option 2</a></li>
+                                    <li><a href="#">Option 3</a></li>
+                                    <li><a href="#">Option 4</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/elements">Elements</a></li>
+                    {% if loggedIn%}
+                    <li>
+                        <a href="#">Hello, {{Name}}</a>
+                        <ul>
+                            <li><a href="/myprojects">My Projects</a></li>
+                            <li><a href="/my-tasks">My Tasks</a></li>
+                            <li><a href="/profile">My Profile</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/logout" class="button primary">Log Out</a></li>
+                    {% else %}
+                    <li><a href="/loginForm">Log In</a></li>
+                    <li><a href="/registrationForm" class="button primary">Sign Up</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        <br><br><br>
+        {% if ttype=='TRAIN' %}
+		<div id="train">
+			{% if state=='NEW' %}
+			<h4 id="pname">{{PName}}</h4>
+			<div class="login-page">
+                <form action="/trainTask?tid={{TID}}" enctype="multipart/form-data" method="POST">
+                    <div class="row gtr-50 gtr-uniform">
+                        <div class="col-6">
+                            <label for="files">Choose images to Train</label>
+                            <input type="file" name="files" id="files" multiple><br>
+                        </div>
+                    </div>
+                    <div class="row gtr-50 gtr-uniform">
+                        <div class="col-6">
+                            <input type="submit" name="submit" value="Train">
+                        </div>
+                    </div>
+                </form>
+			</div>
+			{% else %}
+			<div class="center-modal">
+				<div class="form">
+					<label for="return"><h2>Task Completed</h2></label>
+					<input type="submit" name="return" value="Return to Task Page" onclick="location.href='/project?id={{PID}}';">
+                </div>
+            </div>
+			{% endif %}
+		</div>
+		{% else %}
+		<div id="generate">
+			<!-- <p id="pname">{{PName}}</p> -->
+			{%if state=='RUNNING'%}
+			<div style="width: 100%" onload="init()">
+				<img id="task-image" src="" alt="{{PName}}" style="display: block;margin: auto;">
+			</div>
+			{% else %}
+			<div class="center-modal">
+				<div class="form">
+				<form action="/changeState" method="POST">
+                    <input type="text" name="tid" value="{{TID}}" style="display: none;">
+					<label for="change"><h2>Run Task</h2></label>
+					<input type="submit" name="change" value="Generate">
+				</form>
+				</div>
+			</div>
+			{% endif %}
+		</div>
+		{% endif %}
+        </div>
+        <script>
+			function init(){
+				console.log('in Init')
+				ob = new obj();
+				ob.getimage();
+				// setInterval(ob.getimage(), 120000);
+			}
+			function obj() {
+				this.getimage = function() {
+					console.log('in getimage');
+					var xhr = new XMLHttpRequest();
+					xhr.open("GET", "/getimage?name={{PName}}", true);
+					xhr.setRequestHeader("Authorization","Bearer {{session['access_token']}}");
+					xhr.onreadystatechange = ob.setimage;
+					xhr.send();
+				},
+				this.setimage = function() {
+					console.log('outside setimage');
+					if (this.status==200 && this.readyState==4){
+						console.log('in setimage')
+						var response = JSON.parse(this.responseText);
+						im = document.getElementById('task-image');
+						im.src = response['value'];
+					}
+				}
+			}
+			window.onload = function() {
+				console.log('in init2');
+				ob = new obj();
+				ob.getimage();
+			}
+		</script>
+        <!-- Scripts -->
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.scrolly.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.dropotron.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.scrollex.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/browser.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/breakpoints.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/util.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    </body>
+</html>

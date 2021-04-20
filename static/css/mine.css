@@ -1,0 +1,197 @@
+.login-page {
+    width: 480px;
+    padding: 11% 0 0;
+    margin: auto;
+    border-color:#e44c65;
+    background-color: #1c1d26;
+    border-radius: 5px;
+    border-width: 4px;
+    float: right;
+    padding-right: 10%;
+}
+body::-webkit-scrollbar {
+    display: none;
+}
+.my-preload * {
+    animation: fadeInAnimation ease 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.title hover {
+    color: #ffffff;
+}
+
+.card-container {
+	background-color: #1c1d26;
+    margin-top: 10px;
+    border-color: #e44c65;
+    border: 2px;
+	border-radius: 15px;
+	box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
+	color: #e44c65;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	position: relative;
+	width: 200px;
+	max-width: 100%;
+	text-align: center;
+}
+
+.card-container .pro {
+	color: #231E39;
+	background-color: #e44c65;
+	border-radius: 3px;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 3px 7px;
+	position: absolute;
+	top: 30px;
+	left: 30px;
+}
+
+.card-container .round {
+	border: 1px solid #e44c65;
+	border-radius: 50%;
+	padding: 7px;
+}
+
+.card-container h3{
+	padding-left: 15px;
+}
+
+button.primary {
+	background-color: #e44c65;
+	border: 1px solid #e44c65;
+	border-radius: 3px;
+	color: #231E39;
+	font-family: Montserrat, sans-serif;
+	font-weight: 500;
+	padding: 10px 25px;
+}
+
+#search-bar {
+	margin-left: 1%;
+	margin-right: 0;
+	width: 98%;
+}
+
+.project-bar {
+	margin-left: 1%;
+	margin-right: 1%;
+	width: 97%;
+}
+
+div.project-bar{
+	float: right;
+	display: inline-block;
+	vertical-align:top;
+}
+
+.projects {
+    padding: 2%;
+}
+
+.login-image {
+	margin-top: 8%;
+	border-radius: 30px;
+	margin-left: 5%;
+	height: 550px;
+	width: auto;
+	float: left;
+}
+
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+/* The Modal (background) */
+.modal1 {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  .modal-content{
+	  animation: fadeInAnimation ease 2s;
+	  animation-iteration-count: 1;
+	  animation-fill-mode: forwards;
+  }
+  
+  /* Modal Content */
+  .modal-content {
+	background-color: #231E39;
+	border-radius: 10px;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+  }
+  
+  /* The Close Button */
+  .close {
+	color: #e44c65;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+	color: #aaaaaa;
+	text-decoration: none;
+	cursor: pointer;
+  }
+
+.projects {
+	justify-content: left;
+}
+
+.train-page {
+	align-content: center;
+	border-width: 1px;
+	border-color: ivory;
+}
+
+.center-modal {
+	align-content: center;
+	width: 55%;
+	margin-top: 15%;
+	float: right;
+}
+
+.search {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 35%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}

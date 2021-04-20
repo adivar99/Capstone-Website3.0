@@ -1,0 +1,237 @@
+<!DOCTYPE HTML>
+<!--
+	Landed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Home</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/mine.css') }}" />
+		<noscript<link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
+	</head>
+	<body class="is-preload landing">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h2 id="logo"><a href="/"><b class="title" style="color: #e44c65;">Cr</b>eative</a></h2>
+					<nav id="nav">
+						<ul>
+							<li><a href="/">Home</a></li>
+							<li>
+								<a href="#">Layouts</a>
+								<ul>
+									<li><a href="/leftsidebar">Left Sidebar</a></li>
+									<li><a href="/rightsidebar.html">Right Sidebar</a></li>
+									<li><a href="no-sidebar.html">No Sidebar</a></li>
+									<li>
+										<a href="#">Submenu</a>
+										<ul>
+											<li><a href="#">Option 1</a></li>
+											<li><a href="#">Option 2</a></li>
+											<li><a href="#">Option 3</a></li>
+											<li><a href="#">Option 4</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li><a href="/elements">Elements</a></li>
+							{% if loggedIn%}
+							<li>
+								<a href="#">Hello, {{name}}</a>
+								<ul>
+									<li><a href="/myprojects">My Projects</a></li>
+									<li><a href="/my-tasks">My Tasks</a></li>
+									<li><a href="/profile">My Profile</a></li>
+								</ul>
+							</li>
+							<li><a href="/logout" class="button primary">Log Out</a></li>
+							{% else %}
+							<li><a href="/loginForm">Log In</a></li>
+							<li><a href="/registrationForm" class="button primary">Sign Up</a></li>
+							{% endif %}
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Banner -->
+				<section id="banner">
+					<div class="content">
+						<header>
+							<h2>The Key to The <b style="color: #e44c65;">Future</b></h2>
+							<h2>Lies in the <b style="color: #e44c65;">Past.</b></h2>
+						</header>
+						<!-- <header>
+							<h2>The Future of Fashion is here</h2>
+							<h2 style="color: #e44c65;">Brought to your fingertips<br>By Us</h2>
+						</header> -->
+						<span class="image"><img src="{{ url_for('static', filename='images/pic01.jpg') }}" alt="" /></span>
+					</div>
+					<a href="#one" class="goto-next scrolly">Next</a>
+				</section>
+
+			<!-- One -->
+				<section id="one" class="spotlight style1 bottom">
+					<span class="image fit main"><img src="{{ url_for('static', filename='images/pic02.jpg') }}" alt="" /></span>
+					<div class="content">
+						<div class="container">
+							<div class="row">
+								<div class="col-4 col-12-medium">
+									<header>
+										<h2>Get Inspired by a new generation of Deep-Learning Models</h2>
+										<!-- <p>Use our models to design</p> -->
+									</header>
+								</div>
+								<div class="col-4 col-12-medium">
+									<p>The fashion industry has always been one of the most 
+										lucrative markets in terms of products and design. 
+										Every designer is always looking for new ways to 
+										come up with ideas and inspirations. 
+										Every new design and concept could be a new trend 
+										in fashion.</p>
+								</div>
+								<div class="col-4 col-12-medium">
+									<p>Characteristics such as texture, shape, design 
+										and material are some of the parameters that we 
+										take into consideration while creating variations 
+										in the output. Features, specific to a designer, 
+										can be achieved by loading the previous works of 
+										the designer into the model.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<a href="#two" class="goto-next scrolly">Next</a>
+				</section>
+
+			<!-- Two -->
+				<section id="two" class="spotlight style2 right">
+					<span class="image fit main"><img src="{{ url_for('static', filename='images/pic03.jpg') }}" alt="" /></span>
+					<div class="content">
+						<header>
+							<h2>Leave the processing to us. Worry-Free.</h2>
+							<p>Our State-of-the-art Processors will take the load off the computation, so you can focus on your Art</p>
+						</header>
+						<p>Using a proprietary modification of Generative Adversarial Networks trained on your previous designs
+							, we generate a large collection of designs for you to choose from</p>
+						<ul class="actions">
+							<li><a href="#" class="button">Learn More</a></li>
+						</ul>
+					</div>
+					<a href="#three" class="goto-next scrolly">Next</a>
+				</section>
+
+			<!-- Three -->
+				<section id="three" class="spotlight style3 left">
+					<span class="image fit main bottom"><img src="{{ url_for('static', filename='images/pic04.jpg') }}" alt="" /></span>
+					<div class="content">
+						<header>
+							<h2>Developed by three college Students</h2>
+							<p>Accumsan integer ultricies aliquam vel massa sapien phasellus</p>
+						</header>
+						<p>Feugiat accumsan lorem eu ac lorem amet ac arcu phasellus tortor enim mi mi nisi praesent adipiscing. Integer mi sed nascetur cep aliquet augue varius tempus lobortis porttitor lorem et accumsan consequat adipiscing lorem.</p>
+						<ul class="actions">
+							<li><a href="#" class="button">Learn More</a></li>
+						</ul>
+					</div>
+					<a href="#four" class="goto-next scrolly">Next</a>
+				</section>
+
+			<!-- Four -->
+				<section id="four" class="wrapper style1 special fade-up">
+					<div class="container">
+						<header class="major">
+							<h2>Our customers love us because of our features</h2>
+							<p>Our various features implemented within our website keep our customers coming back for more!</p>
+						</header>
+						<div class="box alt">
+							<div class="row gtr-uniform">
+								<section class="col-4 col-6-medium col-12-xsmall">
+									<span class="icon solid alt major fa-chart-area"></span>
+									<h3>Analytics</h3>
+									<p>Instant updates of the projects and tasks within your organisation</p>
+								</section>
+								<section class="col-4 col-6-medium col-12-xsmall">
+									<span class="icon solid alt major fa-comment"></span>
+									<h3>Collaborate</h3>
+									<p>Share your work with your colleagues and discuss, all with a single tap</p>
+								</section>
+								<section class="col-4 col-6-medium col-12-xsmall">
+									<span class="icon solid alt major fa-flask"></span>
+									<h3>Innovate</h3>
+									<p>Our Deep-Learning models do the dirty work, so that you don't have to.</p>
+								</section>
+								<section class="col-4 col-6-medium col-12-xsmall">
+									<span class="icon solid alt major fa-cloud"></span>
+									<h3>Save to Cloud</h3>
+									<p>All your work is saved on cloud, so you can access your work anywhere.</p>
+								</section>
+								<section class="col-4 col-6-medium col-12-xsmall">
+									<span class="icon solid alt major fa-file"></span>
+									<h3>Print on the go</h3>
+									<p>Instantly print your creations.</p>
+								</section>
+								<section class="col-4 col-6-medium col-12-xsmall">
+									<span class="icon solid alt major fa-lock"></span>
+									<h3>Secure at every step</h3>
+									<p>Every message. Every file. Every API request.</p>
+								</section>
+							</div>
+						</div>
+						<footer class="major">
+							<ul class="actions special">
+								<li><a href="#" class="button">Learn More</a></li>
+							</ul>
+						</footer>
+					</div>
+				</section>
+
+			<!-- Five -->
+				<section id="five" class="wrapper style2 special fade">
+					<div class="container">
+						<header>
+							<h2>Get in touch with us!</h2>
+							<p>We would love to learn how we can help you better!</p>
+						</header>
+						<form method="post" action="#" class="cta">
+							<div class="row gtr-uniform gtr-50">
+								<div class="col-8 col-12-xsmall"><input type="email" name="email" id="email" placeholder="Your Email Address" /></div>
+								<div class="col-4 col-12-xsmall"><input type="submit" value="Get Started" class="fit primary" /></div>
+							</div>
+						</form>
+					</div>
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+						<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+						<li><a href="#" class="icon solid alt fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/jquery.scrolly.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/jquery.dropotron.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/jquery.scrollex.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/browser.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/breakpoints.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/util.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+	</body>
+</html>

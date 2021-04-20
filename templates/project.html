@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{PName}} Tasks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mine.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/material-circle.css') }}">
+    <noscript<link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script>
+        function projects_init(){
+            console.log("in Init");
+            ob = new obj();
+            ob.getprojects();
+            setInterval(ob.getprojects, 120000);
+        }
+
+        function search() {
+            grid = document.getElementById("myprojects");
+            filter = document.getElementById("search-bar")
+            cards = grid.getElementsByClassName("card");
+            for(i=0;i<cards.length;i++) {
+                nam0 = cards[i].getElementsByTagName("h3")[0];
+                console.log(nam0)
+                if(nam0) {
+                    nam1 = nam0.textContent || nam0.innerText;
+                    if(nam1.toUpperCase().indexOf(filter) > -1) {
+                        cards[i].style.display = ""
+                    }
+                    else {
+                        cards[i].style.display = "None"
+                    }
+                }
+            }
+        }
+
+        function obj(){
+            this.getprojects = function(){
+                console.log('in getProducts');
+                ob.clearproducts();
+                console.log('Cleared');
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET','/getTasks?PID={{PID}}',true);
+                val = "{{session['access_token']}}";
+                console.log("Access token:{{ session['access_token'] }}")
+                xhr.setRequestHeader("Authorization", "Bearer "+val)
+                xhr.onreadystatechange = ob.setproducts;
+                xhr.send();
+            },
+            this.setproducts = function(){
+                if(this.status==200 && this.readyState==4){
+                    console.log('in setProjects');
+                    if(JSON.parse(this.responseText)['msg']=='Empty'){
+                        grid = document.getElementById("myprojects");
+                        grid.remove();
+                        inp = document.getElementById("myprojects");
+                        inp.remove();
+                    }
+                    else{
+                        var df = JSON.parse(this.responseText);
+                        grid=document.getElementById("myprojects");
+                        for(var i=0;i<Object.keys(df).length;i++){
+                            data = JSON.parse(df[i]);
+                            div1 = document.createElement('div');
+                            div1.classList.value = "card-container";
+                            // con = document.createElement("span")
+                            // con.classList.value = "pro";
+                            // con.innerHTML = data["status"];
+                            name_e = document.createElement("h3");
+                            name_e.style.fontFamily = "Sans-Serif";
+                            name_e.innerHTML = data["type"];
+                            date = document.createElement("h6");
+                            date.innerHTML = data["date"];
+                            console.log(data['date']);
+                            button_div = document.createElement("div");
+                            button_div.classList.value = "buttons";
+                            button = document.createElement("button");
+                            button.classList.value = "primary";
+                            console.log("PID:"+data["PID"]);
+                            link = document.createElement("a");
+                            link.innerHTML = "Go";
+                            link.style.color = "#231E39";
+                            link.href = "/task?tid="+data["TID"];
+                            // div1.appendChild(con);
+                            div1.appendChild(name_e);
+                            div1.appendChild(date);
+                            button.appendChild(link);
+                            button_div.appendChild(button);
+                            div1.appendChild(button_div);
+                            div1.style.float = "left";
+                            grid.appendChild(div1);
+                        }
+                    }
+                }
+            },
+            this.clearproducts = function(){
+                const myNode = document.getElementById("myprojects");
+                while (myNode.firstChild) {
+                    myNode.removeChild(myNode.lastChild);
+                }
+            }
+        }
+        function shareproject() {
+          console.log("sharing project");
+          o = new oj()
+          o.getcolabs()
+          setInterval(o.getcolabs, 120000);
+        }
+
+        function oj(){
+          this.getcolabs = function() {
+            console.log('in getColabs');
+            o.clearcolab();
+            var xhr = new XMLHttpRequest();
+                xhr.open('GET','/getcolabs',true);
+            val = "{{session['access_token']}}";
+            console.log("Access token:{{ session['access_token'] }}")
+            xhr.setRequestHeader("Authorization", "Bearer "+val)
+            xhr.onreadystatechange = o.setcolabs;
+            xhr.send();
+          },
+          this.setcolabs = function() {
+            if(this.status==200 && this.readyState==4){
+                    console.log('in setcolabs');
+                    if(JSON.parse(this.responseText)['msg']=='Empty'){
+                      tabl = document.getElementById("myTable");
+                      tabl.remove();
+                      inp = document.getElementById("myInput");
+                      inp.remove();
+                    }
+                    else{
+                var df = JSON.parse(this.responseText);
+                console.table(df);
+                tabl = document.getElementById("sharetable");
+                console.log('df:'+df.length)
+                thead = document.createElement('thead');
+                r = document.createElement('tr');
+                nam_head = document.createElement('th');
+                nam_head.innerHTML = 'Name';
+                mail_head = document.createElement('th');
+                mail_head.innerHTML = 'Email';
+                add_head = document.createElement('th');
+                add_head.innerHTML = 'Add';
+                r.appendChild(nam_head);
+                r.appendChild(mail_head);
+                r.appendChild(add_head);
+                thead.appendChild(r);
+                tabl.appendChild(thead);
+                for(var i=0;i<Object.keys(df).length;i++){
+                  row = document.createElement('tr');
+                  df1 = JSON.parse(df[i]);
+                  console.log(df1)
+                  console.table(df1)
+                  elem1 = document.createElement('td');
+                  elem2 = document.createElement('td');
+                  elem3 = document.createElement('td');
+                  elem1.innerHTML = df1['Name'];
+                  elem2.innerHTML = df1['email'];
+                  butt1 = document.createElement('input');
+                  butt1.type = "submit";
+                  link = document.createElement('a');
+                  link.href = '/share?UID='+df1['UID'];
+                  butt1.value = "Add";
+                  butt1.classList.value = "button"
+                  link.appendChild(butt1);
+                  elem3.appendChild(link);
+                  row.appendChild(elem1);
+                  row.appendChild(elem2);
+                  row.appendChild(elem3);
+                  tabl.appendChild(row);
+                }
+              }
+            }
+          },
+          this.clearcolab = function(){
+                const myNode = document.getElementById("sharetable");
+                while (myNode.firstChild) {
+                    myNode.removeChild(myNode.lastChild);
+                }
+            }
+        }
+    </script>
+</head>
+<body class="my-preload" onload="projects_init()">
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header id="header">
+            <h2 id="logo"><a href="/"><b class="title" style="color: #e44c65;">Cr</b>eative</a></h2>
+            <nav id="nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li>
+                        <a href="#">Layouts</a>
+                        <ul>
+                            <li><a href="/leftsidebar">Left Sidebar</a></li>
+                            <li><a href="/rightsidebar">Right Sidebar</a></li>
+                            <li><a href="no-sidebar.html">No Sidebar</a></li>
+                            <li>
+                                <a href="#">Submenu</a>
+                                <ul>
+                                    <li><a href="#">Option 1</a></li>
+                                    <li><a href="#">Option 2</a></li>
+                                    <li><a href="#">Option 3</a></li>
+                                    <li><a href="#">Option 4</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/elements">Elements</a></li>
+                    {% if loggedIn%}
+                    <li>
+                        <a href="#">Hello, {{Name}}</a>
+                        <ul>
+                            <li><a href="/myprojects">My Projects</a></li>
+                            <li><a href="/my-tasks">My Tasks</a></li>
+                            <li><a href="/profile">My Profile</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/logout" class="button primary">Log Out</a></li>
+                    {% else %}
+                    <li><a href="/loginForm">Log In</a></li>
+                    <li><a href="/registrationForm" class="button primary">Sign Up</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        <br><br><br>
+        <div class="row">
+            <div class="col-10" style="width: 90%;">
+                <input type="text" onkeyup="search()" placeholder="Search Tasks" id="search-bar">
+            </div>
+            <div class="col-1" style="padding-left: 3px; padding-right: 3px;" onclick="shareproject()">
+                <input type="submit" class=" button fit primary" id="share" value="Share+">
+            </div>
+        </div>
+        <div class="projects cards-list" id="myprojects"></div>
+        <button class="bttn-material-circle bttn-md bttn-danger" id="create" style="margin: 15px;">+</button>
+    </div>
+    <!-- The Create Modal -->
+	<div id="myModal" class="modal" style="border-radius: 10px;">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p style="font-size: 20px;">Create Task</p>
+          <form action="/createTask" method="POST">
+            <div class="row gtr-uniform gtr-50">
+              <!-- <input type="text" name="type" style="font-family: sans-serif; margin-left: 2%;"></p> -->
+              <div class="col-3 col-12-medium">
+                <input type="radio" name="type" value="train" id="train" checked>
+                <label for="train">Train</label>
+              </div>
+              <div class="col-3 col-12-medium">
+                <input type="radio" name="type" value="generate" id="generate">
+                <label for="generate">Generate</label>
+              </div>
+              <div class="col-3 col-12-medium">
+                <input type="radio" name="type" value="retrieve" id="retrieve">
+                <label for="retrieve">Retrieve</label>
+              </div>
+              <div class="col-3 col-12-medium">
+                <input type="radio" name="type" value="style" id="style">
+                <label for="style">Style</label>
+              </div>
+            </div>
+              <input type="submit" name="Create" class="close button primary small">
+          </form>
+        </div>
+  
+      </div>
+      <!-- The Share Modal -->
+      <div id="myModal1" class="modal1" style="border-radius: 10px;">
+
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p style="font-size: 20px;">Share Project</p>
+          <div class="table-wrapper">
+            <table class="alt" id="sharetable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Add</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+  
+      </div>
+      <script type="text/javascript">
+          var modal = document.getElementById("myModal");
+  
+          // Get the button that opens the modal
+          var btn = document.getElementById("create");
+  
+          // Get the <span> element that closes the modal
+          var span = document.getElementsByClassName("close")[0];
+  
+          // When the user clicks on the button, open the modal
+          btn.onclick = function() {
+            modal.style.display = "block";
+          }
+  
+          // When the user clicks on <span> (x), close the modal
+          span.onclick = function() {
+            modal.style.display = "none";
+          }
+  
+          // When the user clicks anywhere outside of the modal, close it
+          window.onclick = function(event) {
+            if (event.target == modal) {
+              modal.style.display = "none";
+            }
+          }
+      </script>
+      <script type="text/javascript">
+        var modal1 = document.getElementById("myModal1");
+
+        // Get the button that opens the modal
+        var btn1 = document.getElementById("share");
+
+        // Get the <span> element that closes the modal
+        var span1 = document.getElementsByClassName("close")[1];
+
+        // When the user clicks on the button, open the modal
+        btn1.onclick = function() {
+          modal1.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span1.onclick = function() {
+          modal1.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal1) {
+            modal1.style.display = "none";
+          }
+        }
+    </script>
+
+    <!-- Scripts -->
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.scrolly.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.dropotron.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.scrollex.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/browser.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/breakpoints.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/util.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

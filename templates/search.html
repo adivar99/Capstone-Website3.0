@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mine.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/material-circle.css') }}">
+    <noscript<link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+</head>
+<body class="my-preload">
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header id="header">
+            <h2 id="logo"><a href="/"><b class="title" style="color: #e44c65;">Cr</b>eative</a></h2>
+            <nav id="nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li>
+                        <a href="#">Layouts</a>
+                        <ul>
+                            <li><a href="/leftsidebar">Left Sidebar</a></li>
+                            <li><a href="/rightsidebar">Right Sidebar</a></li>
+                            <li><a href="no-sidebar.html">No Sidebar</a></li>
+                            <li>
+                                <a href="#">Submenu</a>
+                                <ul>
+                                    <li><a href="#">Option 1</a></li>
+                                    <li><a href="#">Option 2</a></li>
+                                    <li><a href="#">Option 3</a></li>
+                                    <li><a href="#">Option 4</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/elements">Elements</a></li>
+                    {% if loggedIn%}
+                    <li>
+                        <a href="#">Hello, {{Name}}</a>
+                        <ul>
+                            <li><a href="/myprojects">My Projects</a></li>
+                            <li><a href="/my-tasks">My Tasks</a></li>
+                            <li><a href="/profile">My Profile</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/logout" class="button primary">Log Out</a></li>
+                    {% else %}
+                    <li><a href="/loginForm">Log In</a></li>
+                    <li><a href="/registrationForm" class="button primary">Sign Up</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        <br><br><br>
+        <div>
+            <form action="/result" method="POST" class="row search">
+                <div class="col-11">
+                    <input type="text" placeholder="Search" id="search-bar" name="book">
+                </div>
+                <div class="col-1" style="padding-left: 3px; padding-right: 3px;">
+                    <input type="submit" class="primary button btn" id="search-button" value="Search">
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.scrolly.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.dropotron.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.scrollex.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/browser.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/breakpoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/util.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

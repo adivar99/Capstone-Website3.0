@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mine.css') }}" />
+    <noscript<link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
+</head>
+<body class="my-preload">
+    <!-- Header -->
+    <header id="header">
+        <h2 id="logo"><a href="/"><b style="color: #e44c65;">Cr</b>eative</a></h2>
+        <nav id="nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li>
+                    <a href="#">Layouts</a>
+                    <ul>
+                        <li><a href="/leftsidebar">Left Sidebar</a></li>
+                        <li><a href="right-sidebar.html">Right Sidebar</a></li>
+                        <li><a href="no-sidebar.html">No Sidebar</a></li>
+                        <li>
+                            <a href="#">Submenu</a>
+                            <ul>
+                                <li><a href="#">Option 1</a></li>
+                                <li><a href="#">Option 2</a></li>
+                                <li><a href="#">Option 3</a></li>
+                                <li><a href="#">Option 4</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="/elements">Elements</a></li>
+                <li><a href="/loginForm">Log In</a></li>
+                <li><a href="/registrationForm" class="button primary">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+    <img src="{{url_for('static', filename='images/Success.png')}}" alt="Login" class="login-image">
+    <div class="login-page">
+        <h3>Login</h3>
+        <form method="POST" action="/login">
+            <div class="row gtr-uniform gtr-50">
+                <div class="col-12">
+                    <input type="email" name="email" id="email" value="" placeholder="Email" />
+                </div>
+                <div class="col-12">
+                    <input type="password" name="password" placeholder="Password" />
+                </div>
+                <div class="col-12">
+                    <input type="password" name="key" placeholder="6-digit Key" />
+                </div>
+                <div>
+                    <a href="/registrationForm">Not yet a Member? Sign up</a>
+                </div>
+                <div class="col-12">
+                    <ul class="actions">
+                        <li><input type="submit" value="Login" class="primary" /></li>
+                        <li><input type="reset" value="Reset" /></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

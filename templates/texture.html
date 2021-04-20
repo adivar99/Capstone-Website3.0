@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mine.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/material-circle.css') }}">
+    <noscript<link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+
+    <script type="text/javascript">
+    function readURL1(input) {
+        if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {$('#i1')  .attr('src', e.target.result) };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        function readURL2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {$('#i2')  .attr('src', e.target.result) };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    <script type="text/javascript">
+    $(function() {
+    $('#upload-file-btn').click(function() {
+        var form_data = new FormData($('#upload-file')[0]);
+        $.ajax({
+            type: 'POST',
+            url: '/pattern_model',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                console.log(data);
+                document.getElementById("output").src=data;
+
+
+            },
+        });
+    });
+    });
+    </script>
+</head>
+<body class="my-preload">
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header id="header">
+            <h2 id="logo"><a href="/"><b class="title" style="color: #e44c65;">Cr</b>eative</a></h2>
+            <nav id="nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li>
+                        <a href="#">Layouts</a>
+                        <ul>
+                            <li><a href="/leftsidebar">Left Sidebar</a></li>
+                            <li><a href="/rightsidebar">Right Sidebar</a></li>
+                            <li><a href="no-sidebar.html">No Sidebar</a></li>
+                            <li>
+                                <a href="#">Submenu</a>
+                                <ul>
+                                    <li><a href="#">Option 1</a></li>
+                                    <li><a href="#">Option 2</a></li>
+                                    <li><a href="#">Option 3</a></li>
+                                    <li><a href="#">Option 4</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/elements">Elements</a></li>
+                    {% if loggedIn%}
+                    <li>
+                        <a href="#">Hello, {{Name}}</a>
+                        <ul>
+                            <li><a href="/myprojects">My Projects</a></li>
+                            <li><a href="/my-tasks">My Tasks</a></li>
+                            <li><a href="/profile">My Profile</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/logout" class="button primary">Log Out</a></li>
+                    {% else %}
+                    <li><a href="/loginForm">Log In</a></li>
+                    <li><a href="/registrationForm" class="button primary">Sign Up</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        <br><br><br>
+        <center>
+            <form id="upload-file" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-6">
+                        <h2>Style Image</h2>
+                        <div style="height: 256;width: 256;border: 3px solid inherit">
+                            <img src="{{url_for('static', filename='style_transfer/colour/content/style.jpg')}}" id="i1" height=256 alt="" name="image1">
+                        </div>
+                        <input type="file" onchange="readURL1(this);" id="input1" name="img1">
+                    </div> 
+                    <div class="col-6">
+                        <h2>Content Image</h2>
+                        <div style="height: 256;width: 256;border: 3px solid inherit">
+                            <img src="{{url_for('static', filename='style_transfer/colour/content/pic1.jpg')}}" id="i2" height=256 alt="" name="image2">
+                        </div>
+                        <input type="file" onchange="readURL2(this);" id="input2" name="img2">
+                    </div>
+                </div>
+                <br><br><br>
+                <div class="row">
+                    <div class="col-12" style="margin-left: 10%;margin-right: 10%;">
+                        <button id="upload-file-btn" type="button" class="button fit">Upload</button>
+                    </div>
+                </div>
+            </form>
+            <br><br><br>
+            <img class="centered" height=256 id="output"></img>
+        </center>
+    </div>
+</body>
+</html>

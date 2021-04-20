@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{PName}} Style Transfer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mine.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/material-circle.css') }}">
+    <noscript<link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+</head>
+<body class="my-preload">
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header id="header">
+            <h2 id="logo"><a href="/"><b class="title" style="color: #e44c65;">Cr</b>eative</a></h2>
+            <nav id="nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li>
+                        <a href="#">Layouts</a>
+                        <ul>
+                            <li><a href="/leftsidebar">Left Sidebar</a></li>
+                            <li><a href="/rightsidebar">Right Sidebar</a></li>
+                            <li><a href="no-sidebar.html">No Sidebar</a></li>
+                            <li>
+                                <a href="#">Submenu</a>
+                                <ul>
+                                    <li><a href="#">Option 1</a></li>
+                                    <li><a href="#">Option 2</a></li>
+                                    <li><a href="#">Option 3</a></li>
+                                    <li><a href="#">Option 4</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/elements">Elements</a></li>
+                    {% if loggedIn%}
+                    <li>
+                        <a href="#">Hello, {{Name}}</a>
+                        <ul>
+                            <li><a href="/myprojects">My Projects</a></li>
+                            <li><a href="/my-tasks">My Tasks</a></li>
+                            <li><a href="/profile">My Profile</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/logout" class="button primary">Log Out</a></li>
+                    {% else %}
+                    <li><a href="/loginForm">Log In</a></li>
+                    <li><a href="/registrationForm" class="button primary">Sign Up</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        <br><br><br>
+        <center style="padding: 2%;">
+            <h1 style="font-weight: bolder; font-size: 40px;">Style Transfer</h1>
+            <div class="row">
+                <div class="col-4">
+                    <a href="/colour" style="color: #1c1d26;"><button class="fit button" style="height: 300px;"><h2 style="color: inherit;">Color</h2></button></a>
+                </div>
+                <div class="col-4">
+                    <a href="/texture" style="color: #1c1d26;"><button class="fit button" style="height: 300px;"><h2 style="color: inherit;">Texture</h2></button></a>
+                </div>
+                <div class="col-4">
+                    <a href="/pattern" style="color: #1c1d26;"><button class="fit button" style="height: 300px;"><h2 style="color: inherit;">Pattern</h2></button></a>
+                </div>
+            </div>
+            <!-- <div class="container">
+                <div class="box">
+                    <div class="box-row">
+                                        <a href="/colour">
+                        <div class="box-cell box1">
+                                                <br><br><br><br><br><br><br><br><br><br>
+                            Colour
+                        </div>
+                                        </a>
+                                            <div class="box-cell box4">
+    
+                        </div>
+                                            <a href="/texture">
+                        <div class="box-cell box2">
+                                                <br><br><br><br><br><br><br><br><br><br>
+                            Texture
+                        </div>
+                                        </a>
+    
+                                            <div class="box-cell box5">
+                                            </div>
+                                            <a href="/pattern">
+                        <div class="box-cell box3">
+                                                <br><br><br><br><br><br><br><br><br><br>
+                            Pattern
+                        </div>
+                                        </a>
+    
+                    </div>
+                </div>
+            </div> -->
+            </center>
+    </div>
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.scrolly.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.dropotron.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.scrollex.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/browser.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/breakpoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/util.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
