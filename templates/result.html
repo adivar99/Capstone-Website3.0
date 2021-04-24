@@ -36,11 +36,11 @@
                     console.log(li.length)
                     for(var i=0;i<li.length;i++) {
                         row = document.createElement('div')
-                        row.style="text-align:center; font-weight:bold;height: 250px;"
+                        // row.style="text-align:center; font-weight:bold;height: 250px;"
                         row.classList.value = "row";
                         for(var j=0;j<4;j++) {
                             col = document.createElement('div');
-                            col.classList.value = "col-6";
+                            col.classList.value = "col-3";
                             im = document.createElement('img')
                             st = li[i];
                             im.src = st;
@@ -57,7 +57,7 @@
         }
     </script>
 </head>
-<body class="my-preload">
+<body class="my-preload" onload="init()">
     <div class="page-wrapper">
         <!-- Header -->
         <header id="header">
@@ -101,7 +101,7 @@
             </nav>
         </header>
         <br><br><br>
-        <div class="items"></div>
+        <div id="items" style="margin-left: 1%;margin-right:1%;"></div>
     </div>
     <!-- Scripts -->
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>

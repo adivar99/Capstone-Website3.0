@@ -224,8 +224,6 @@ def build_query_vector(keywords,inverted_index):
     count = wcount(keywords)
     vector = np.zeros((len(count),1))
     for i, word in enumerate(keywords):
-        print(count, i, word)
-        print('each' in inverted_index)
         vector[i] = float(count[word])/len(count) * (1+math.log(df.shape[0]/len(inverted_index[word])))
     return vector
 
@@ -241,7 +239,13 @@ def generateVectors(keywords,inverted_index):
 
 
 def consine_similarity(v1, v2):
-    return np.dot(v1,v2)/float(np.linalg.norm(v1)*np.linalg.norm(v2))
+    d1 = np.dot(v1,v2)
+    n1 = np.linalg.norm(v1)
+    n2 = np.linalg.norm(v2)
+    if float(n1*n2):
+        return np.dot(v1,v2)/float(np.linalg.norm(v1)*np.linalg.norm(v2))
+    else:
+        return 0
 
 
 def compute_relevance(tf_idf_matrix,query_vector):
@@ -297,4 +301,5 @@ def input_query(keywords,inverted_index,idf):
 
     res=compute_relevance(tf_idf_matrix,query_vector)
     res=sorted(res,key=lambda item: (item[1]),reverse=True)
+    print("res:", res)
     return res
