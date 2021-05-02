@@ -2,10 +2,10 @@ flask
 flask-jwt-extended
 werkzeug
 pandas
-hashlib
 nltk
 pyspellchecker
 textblob
 nltk
 tensorflow
 scipy
+cv2

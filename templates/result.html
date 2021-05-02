@@ -65,31 +65,12 @@
             <nav id="nav">
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li>
-                        <a href="#">Layouts</a>
-                        <ul>
-                            <li><a href="/leftsidebar">Left Sidebar</a></li>
-                            <li><a href="/rightsidebar">Right Sidebar</a></li>
-                            <li><a href="no-sidebar.html">No Sidebar</a></li>
-                            <li>
-                                <a href="#">Submenu</a>
-                                <ul>
-                                    <li><a href="#">Option 1</a></li>
-                                    <li><a href="#">Option 2</a></li>
-                                    <li><a href="#">Option 3</a></li>
-                                    <li><a href="#">Option 4</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="/elements">Elements</a></li>
+                    <li><a href="/elements">About</a></li>
                     {% if loggedIn%}
                     <li>
                         <a href="#">Hello, {{Name}}</a>
                         <ul>
                             <li><a href="/myprojects">My Projects</a></li>
-                            <li><a href="/my-tasks">My Tasks</a></li>
-                            <li><a href="/profile">My Profile</a></li>
                         </ul>
                     </li>
                     <li><a href="/logout" class="button primary">Log Out</a></li>
