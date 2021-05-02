@@ -7,3 +7,5 @@ nltk
 pyspellchecker
 textblob
 nltk
+tensorflow
+scipy

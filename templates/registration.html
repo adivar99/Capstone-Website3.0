@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/mine.css') }}" />
     <noscript<link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
 </head>
-<body class="my-preload">
+<body class="my-preload" onload="init()">
     <!-- Header -->
     <header id="header">
         <h2 id="logo"><a href="/"><b style="color: #e44c65;">Cr</b>eative</a></h2>
@@ -74,5 +74,13 @@
             </div>
         </form>
     </div>
+    <script>
+        function init() {
+            if("{{key}}" != "") {
+                window.alert("{{key}} is your private key used to secure your submissions and also as an authentication method. Please save this number and do not share it with anyone");
+                window.location.href("https://localhost:5000/login");
+            }
+        }
+    </script>
 </body>
 </html>

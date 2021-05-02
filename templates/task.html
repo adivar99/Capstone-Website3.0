@@ -59,17 +59,17 @@
 		<div id="train">
 			{% if state=='NEW' %}
 			<h4 id="pname">{{PName}}</h4>
-			<div class="login-page">
+			<div class="center-modal">
                 <form action="/trainTask?tid={{TID}}" enctype="multipart/form-data" method="POST">
                     <div class="row gtr-50 gtr-uniform">
                         <div class="col-6">
                             <label for="files">Choose images to Train</label>
-                            <input type="file" name="files" id="files" multiple><br>
+                            <input type="file" name="files" id="files" multiple style="margin-bottom: 15px;"><br>
                         </div>
                     </div>
                     <div class="row gtr-50 gtr-uniform">
                         <div class="col-6">
-                            <input type="submit" name="submit" value="Train">
+                            <input type="submit" name="submit" value="Train" id="submit-train">
                         </div>
                     </div>
                 </form>
@@ -136,6 +136,16 @@
 				ob.getimage();
 			}
 		</script>
+        <script>
+            $(document).ready(function() {
+                $('#submit-train').bind("click", function() {
+                    if(!$('#files').val()) {
+                        alert("No files selected")
+                        return false;
+                    }
+                });
+            });
+        </script>
         <!-- Scripts -->
         <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/jquery.scrolly.min.js') }}"></script>

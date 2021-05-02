@@ -458,7 +458,7 @@ def getimages():
 		return redirect(url_for('home'))
 	book = session['book']
 	res = input_query(book, inverted_index, idf)
-	res0 = [i for i in res if i[1] > 0.5]
+	res0 = [i for i in res if i[1] > 0.8]
 	# ref = [i for i in res if i[1] < 0.5]
 	res1 = [image_name[i[0]] for i in res0]
 	res2 = [url_for('static', filename='MasterShirt/'+i) for i in res1]
